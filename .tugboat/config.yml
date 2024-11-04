@@ -52,7 +52,6 @@ services:
 
         # Install/update packages managed by composer
         - composer install --optimize-autoloader
-        - composer require --dev drupal/stage_file_proxy
 
       build:
         # First ensure database is accessible
@@ -65,15 +64,5 @@ services:
         - vendor/bin/drush pm:enable -y admin_toolbar admin_toolbar_tools admin_toolbar_search
         - vendor/bin/drush pm:enable -y ai ai_content ai_provider_openai key
         
-        # Import configuration
-        - vendor/bin/drush config:import -y
-        - vendor/bin/drush updatedb -y
-        - vendor/bin/drush cache:rebuild
-
-        # Enable and configure stage_file_proxy
-        - vendor/bin/drush pm:enable --yes stage_file_proxy
-        - vendor/bin/drush config:set --yes stage_file_proxy.settings origin "https://www.example.com"
-        - vendor/bin/drush config:set --yes stage_file_proxy.settings origin_dir "sites/default/files"
-
         # Final cache rebuild
         - vendor/bin/drush cache:rebuild
