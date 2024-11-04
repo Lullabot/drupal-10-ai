@@ -35,14 +35,26 @@ services:
         - ln -snf "${TUGBOAT_ROOT}/vendor/bin/drush" /usr/local/bin/drush
 
       update:
-        # Copy Tugboat-specific settings
+        # Ensure settings.php exists and is writable
+        - cp "${DOCROOT}/sites/default/default.settings.php" "${DOCROOT}/sites/default/settings.php"
+        - chmod 777 "${DOCROOT}/sites/default/settings.php"
+        
+        # Copy and include Tugboat-specific settings
         - cp "${TUGBOAT_ROOT}/.tugboat/settings.local.php" "${DOCROOT}/sites/default/settings.local.php"
+        - echo "include __DIR__ . '/settings.local.php';" >> "${DOCROOT}/sites/default/settings.php"
+        
+        # Set proper permissions
+        - chmod 644 "${DOCROOT}/sites/default/settings.php"
+        - chmod 644 "${DOCROOT}/sites/default/settings.local.php"
 
         # Install/update packages managed by composer
         - composer install --optimize-autoloader
         - composer require --dev drupal/stage_file_proxy
 
       build:
+        # First ensure database is accessible
+        - until mysql -h database -u tugboat -ptugboat -e "SHOW DATABASES;" tugboat; do sleep 5; done
+        
         # Import configuration and update database
         - vendor/bin/drush cache:rebuild
         - vendor/bin/drush config:import -y

@@ -11,6 +11,11 @@ $databases['default']['default'] = [
   'driver' => 'mysql',
 ];
 
+// Ensure error reporting is enabled
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
 // Use the TUGBOAT_REPO_ID to generate a hash salt for Tugboat sites
 $settings['hash_salt'] = hash('sha256', getenv('TUGBOAT_REPO_ID'));
 
