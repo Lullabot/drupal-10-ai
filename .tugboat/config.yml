@@ -63,8 +63,7 @@ services:
         
         # Enable required modules
         - vendor/bin/drush pm:enable -y admin_toolbar admin_toolbar_tools admin_toolbar_search
-        - vendor/bin/drush pm:enable -y ai ai_content_editing_tools
-        - vendor/bin/drush pm:enable -y ai_provider_openai key
+        - vendor/bin/drush pm:enable -y ai ai_content ai_provider_openai key
         
         # Import configuration
         - vendor/bin/drush config:import -y
