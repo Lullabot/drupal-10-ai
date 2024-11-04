@@ -55,8 +55,13 @@ services:
         # First ensure database is accessible
         - until mysql -h database -u tugboat -ptugboat -e "SHOW DATABASES;" tugboat; do sleep 5; done
         
-        # Import configuration and update database
+        # Install Drupal
+        - vendor/bin/drush site:install umami --yes --account-name=admin --account-pass=admin --db-url=mysql://tugboat:tugboat@database/tugboat
+        
+        # Clear caches after install
         - vendor/bin/drush cache:rebuild
+        
+        # Now we can import configuration
         - vendor/bin/drush config:import -y
         - vendor/bin/drush updatedb -y
         - vendor/bin/drush cache:rebuild
