@@ -15,6 +15,9 @@ services:
     depends: database
     commands:
       init:
+        # Increase PHP memory limit
+        - echo "memory_limit = 512M" >> /usr/local/etc/php/conf.d/memory-limit.ini
+        
         # Install required PHP extensions and Apache modules
         - docker-php-ext-install opcache
         - a2enmod headers rewrite
