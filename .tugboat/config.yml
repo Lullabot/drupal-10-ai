@@ -62,9 +62,9 @@ services:
         - vendor/bin/drush site:install demo_umami --yes --account-name=admin --account-pass=admin --db-url=mysql://tugboat:tugboat@database/tugboat
         
         # Enable required modules
-        - vendor/bin/drush pm:enable -y admin_toolbar admin_toolbar_extras admin_toolbar_search
+        - vendor/bin/drush pm:enable -y admin_toolbar admin_toolbar_tools admin_toolbar_search
         - vendor/bin/drush pm:enable -y ai ai_content_editing_tools
-        - vendor/bin/drush pm:enable -y openai_provider key
+        - vendor/bin/drush pm:enable -y ai_provider_openai key
         
         # Import configuration
         - vendor/bin/drush config:import -y
