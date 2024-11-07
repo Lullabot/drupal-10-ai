@@ -17,6 +17,8 @@
     "require": {
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.5",
+        "drupal/ai": "1.0.x-dev",
+        "drupal/ai_agents": "1.0.x-dev",
         "drupal/ai_provider_openai": "^1.0@beta",
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-project-message": "^10.2",

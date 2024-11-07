@@ -7,8 +7,3 @@ configure: ai_ckeditor.generate_completion
 dependencies:
   - drupal:ckeditor5
   - ai:ai
-
-# Information added by Drupal.org packaging script on 2024-10-29
-version: '1.0.0-beta1'
-project: 'ai'
-datestamp: 1730196283

@@ -482,7 +482,25 @@ class GeneralHelper {
   }
 
   /**
-   * Get text format.
+   * Get possible text formats for a drop down.
+   *
+   * @return array
+   *   The text formats.
+   */
+  public function getTextFormatsOptions() {
+    $formats = $this->entityTypeManager->getStorage('filter_format')->loadMultiple();
+    $options = [
+      '' => $this->t('-- None/User Based --'),
+    ];
+
+    foreach ($formats as $format) {
+      $options[$format->id()] = $format->label();
+    }
+    return $options;
+  }
+
+  /**
+   * Calculate text format.
    *
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   The field definition.
@@ -490,7 +508,7 @@ class GeneralHelper {
    * @return string|null
    *   The format.
    */
-  public function getTextFormat(FieldDefinitionInterface $fieldDefinition) {
+  public function calculateTextFormat(FieldDefinitionInterface $fieldDefinition) {
     $allFormats = $this->entityTypeManager->getStorage('filter_format')->loadMultiple();
     // Maybe no formats are available.
     if (empty($allFormats)) {

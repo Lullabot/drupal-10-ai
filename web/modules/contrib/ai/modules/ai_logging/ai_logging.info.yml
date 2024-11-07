@@ -8,8 +8,3 @@ configure: ai_logging.settings_form
 dependencies:
   - ai:ai
   - drupal:views
-
-# Information added by Drupal.org packaging script on 2024-10-29
-version: '1.0.0-beta1'
-project: 'ai'
-datestamp: 1730196283
