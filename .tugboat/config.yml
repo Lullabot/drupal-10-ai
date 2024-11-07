@@ -63,6 +63,7 @@ services:
         # Enable required modules
         - vendor/bin/drush pm:enable -y admin_toolbar admin_toolbar_tools admin_toolbar_search
         - vendor/bin/drush pm:enable -y ai ai_content ai_provider_openai key
+        - vendor/bin/drush pm:enable -y ai_agents ai_agents_explorer ai_assistant_api ai_chatbot
         
         # Final cache rebuild
         - vendor/bin/drush cache:rebuild
